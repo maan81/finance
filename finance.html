@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+	<title>Finance Calculator</title>
+	<style type="text/css">
+	.error{
+		float: right;
+		color:red;
+		visibility: hidden;
+	}
+	.reqd {
+	    color: #FF0000;
+	    padding: 0 5px 0 0;
+	}
+
+	/* very basic stylings */
+	form{
+	    width: 600px;
+	}
+	table {
+	    width: 560px;
+	}
+	td {
+	    padding: 4px;
+	}
+	</style>
+</head>
+<body>
+
+
+<form>
+	<fieldset>
+		<legend>Finance Calculator</legend>
+
+
+		<table>
+
+			<tr>
+				<td><span class='reqd'>*</span><label for='loan_amount'>Loan Amount</label></td>
+				<td>
+					<span class='error'><img src="problem-on.gif"></span>
+					<input type="number" name='loan_amount' id='loan_amount' class='pvt_dec'/>
+				</td>
+			</tr>
+
+			<tr>
+				<td><span class='reqd'>*</span><label for='term'>Term (length) of loan</label></td>
+				<td>
+					<span class='error'><img src="problem-on.gif"></span>
+					<select name="term" id='term'>
+						<option>Select One</optgroup>
+						<option value='2'>2 Years</option>
+						<option value='3'>3 Years</option>
+						<option value='4'>4 Years</option>
+						<option value='5'>5 Years</option>
+					</select>
+				</td>
+			</tr>
+
+			<tr>
+				<td><label for='residual_amount'>Residual Amount</label></td>
+				<td>
+					<span class='error'><img src="problem-on.gif"></span>
+					<input type="number" name='residual_amount' id='residual_amount' class='pvt_dec'/>
+				</td>
+			</tr>
+
+			<tr>
+				<td><span class='reqd'>*</span><label for='rate'>Interest rate:</label></td>
+				<td>
+					<span class='error'><img src="problem-on.gif"></span>
+					<select name="rate" id='rate'>
+						<option>Select One</option>
+						<option value='5'   >5.00% </option>
+						<option value='5.5' >5.50% </option>
+						<option value='6'   >6.00% </option>
+						<option value='6.5' >6.50% </option>
+						<option value='7'   >7.00% </option>
+						<option value='7.5' >7.50% </option>
+						<option value='8'   >8.00% </option>
+						<option value='8.5' >8.50% </option>
+						<option value='9'   >9.00% </option>
+						<option value='9.5' >9.50% </option>
+						<option value='10'  >10.00%</option>
+						<option value='10.5'>10.50%</option>
+						<option value='11'  >11.00%</option>
+						<option value='11.5'>11.50%</option>
+						<option value='12'  >12.00%</option>
+						<option value='12.5'>12.50%</option>
+						<option value='13'  >13.00%</option>
+						<option value='13.5'>13.50%</option>
+						<option value='14'  >14.00%</option>
+						<option value='14.5'>14.50%</option>
+						<option value='15'  >15.00%</option>
+						<option value='15.5'>15.50%</option>
+						<option value='16'  >16.00%</option>
+					</select>
+				</td>
+			</tr>
+
+			<tr>
+				<td><span class='reqd'>*</span>Repayment Frequency</td>
+				<td>
+					<span class='error'><img src="problem-on.gif"></span>
+					<input type='radio' name='frequency' value='12' id='freq_12' checked='checked'/><label for='freq_12'>Monthly</label>
+					<input type='radio' name='frequency' value='32' id='freq_32'/><label for='freq_32'>Fortnightly</label>
+					<input type='radio' name='frequency' value='52' id='freq_52'/><label for='freq_52'>Weekly</label>
+				</td>
+			</tr>
+
+
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					<button id='calculate'>Calculate</button>
+				</td>
+			</tr>
+
+
+			<tr>
+				<td>Result</td>
+				<td><div id='result'></div></td>
+			</tr>
+
+		</table>
+
+	</fieldset>
+
+</form>
+
+
+
+<script type="text/javascript" src="jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="jquery.numeric.js"></script>
+<script type="text/javascript" src="calculation.js"></script>
+
+</body>
+</html>
