@@ -14,6 +14,7 @@
 	}
 	select, input {
 	    border: 1px solid #000000;
+	    text-align: left;
 	}
 
 
@@ -42,7 +43,7 @@
 				<td><span class='reqd'>*</span><label for='loan_amount'>Loan Amount</label></td>
 				<td>
 					<span class='error'><img src="problem-on.gif"></span>
-					<input type="number" name='loan_amount' id='loan_amount' class='pvt_dec'/>
+					$<input type="number" name='loan_amount' id='loan_amount' class='pvt_dec' min='0' />
 				</td>
 			</tr>
 
@@ -61,10 +62,18 @@
 			</tr>
 
 			<tr>
-				<td><label for='residual_amount'>Residual Amount</label></td>
+				<td><label for='residual_amount'>Residual (Amount)</label></td>
 				<td>
 					<span class='error'><img src="problem-on.gif"></span>
-					<input type="number" name='residual_amount' id='residual_amount' class='pvt_dec'/>
+					$<input type="number" name='residual_amount' id='residual_amount' class='pvt_dec' min='0' />
+				</td>
+			</tr>
+
+			<tr>
+				<td><label for='residual_percentage'>Residual (Percentage)</label></td>
+				<td>
+					<span class='error'><img src="problem-on.gif"></span>
+					<input type="number" name='residual_percentage' id='residual_percentage' class='pvt_dec' min='0' />%
 				</td>
 			</tr>
 
@@ -132,8 +141,8 @@
 </form>
 
 
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
 <script type="text/javascript" src="jquery.numeric.js"></script>
 <script type="text/javascript" src="calculation.js"></script>
 

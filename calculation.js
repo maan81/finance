@@ -12,7 +12,7 @@ function validate(loan_amount,residual_amount,rate,term,frequency){
 
 	var err = [];
 
-	//console.log(loan_amount)
+	console.log(loan_amount)
 	if(isNaN(loan_amount) || loan_amount<1 ){
 		err.push('loan_amount');
 	}
@@ -20,7 +20,10 @@ function validate(loan_amount,residual_amount,rate,term,frequency){
 
 	if(isNaN(residual_amount)){
 		residual_amount = 0;
-		$('#residual_amount').val('0')
+		$('#residual_amount').val('0');
+	
+	}else if(residual_amount>loan_amount){
+		err.push('residual_amount');
 	}
 	//console.log(residual_amount)
 
@@ -70,30 +73,82 @@ function validate(loan_amount,residual_amount,rate,term,frequency){
 
 $(function(){
 
-	$('.pvt_dec').numeric({negative : false});
+	//enable +ve numbers only
+	$('.pvt_dec')
+		.numeric({/*decimal : '.',*/ separator : ',' , negative : false})
 
+
+	//when changing resiual amount ...
+	$('#residual_amount').change(function(){
+
+		//change residual percentage
+		$('#residual_percentage').val(
+										($(this).val() / $('#loan_amount').val() * 100)
+											.toFixed(2)
+									)
+
+		//validate 
+		if($(this).val()<$('#loan_amount')){
+			$(this)
+				.css('border-color','red')
+				.prev()
+				.css('visibility','visible');
+
+			$('#residual_percentage')
+				.css('border-color','red')
+				.prev()
+				.css('visibility','visible');
+		}
+	})
+
+
+	// //when changing residual percentage ...
+	// $('#residual_percentage').change(function(){
+
+	// 	//change residual amount
+	// 	$('#residual_amount').val(
+	// 								($(this).val() * $('#loan_amount').val() )
+	// 										.toFixed(2)
+	// 								)
+	// })
+
+
+	// $('#loan_amount').change(function(){
+	// 	$('#residual_amount').trigger('change');
+	// 	//$('#residual_percentage').trigger('change');
+	// })
 
 	$('#calculate').click(function(e){
 		e.preventDefault();
 
-		var loan_amount   = parseFloat($('#loan_amount').val()),
-			residual_amount=parseFloat($('#residual_amount').val()),
+
+		var loan_amount   = parseFloat($('#loan_amount').val().split(',').join('')),
 			rate          = parseFloat($('#rate').val()) ,
 			term          = parseFloat($('#term').val()),
 			frequency     = parseFloat($('input[name=frequency]:checked').val());
 
 
+		if($('#residual_amount').val().length>0){
+			residual_amount=parseFloat($('#residual_amount').val().split(',').join(''))
+		}
+
+
+
+
+
+
 		var res = validate(loan_amount,residual_amount,rate,term,frequency);
+
 		if(res && res.length>0){
 			for(var i=0;i<res.length;i++){
 
-				if(res[i]=='residual_amount'){
+				if(res[i]=='residual_amount' && $('#residual_amount').val().length==0){
 					$('#residual_amount').val('0');
 					residual_amount=0;
 					continue;
 				}
 
-
+console.log(res[i])
 				$('#'+res[i])
 					.css('border-color','red')
 					.prev()
