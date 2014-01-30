@@ -16,7 +16,9 @@
 	    border: 1px solid #000000;
 	    text-align: left;
 	}
-
+	#residual_percentage {
+	    width: 50px;
+	}
 
 	form{
 	    width: 600px;
@@ -43,7 +45,7 @@
 				<td><span class='reqd'>*</span><label for='loan_amount'>Loan Amount</label></td>
 				<td>
 					<span class='error'><img src="problem-on.gif"></span>
-					$<input type="number" name='loan_amount' id='loan_amount' class='pvt_dec' min='0' />
+					$<input type="text" name='loan_amount' id='loan_amount' class='pvt_dec' />
 				</td>
 			</tr>
 
@@ -65,7 +67,7 @@
 				<td><label for='residual_amount'>Residual (Amount)</label></td>
 				<td>
 					<span class='error'><img src="problem-on.gif"></span>
-					$<input type="number" name='residual_amount' id='residual_amount' class='pvt_dec' min='0' />
+					$<input type="text" name='residual_amount' id='residual_amount' class='pvt_dec' />
 				</td>
 			</tr>
 
@@ -73,7 +75,7 @@
 				<td><label for='residual_percentage'>Residual (Percentage)</label></td>
 				<td>
 					<span class='error'><img src="problem-on.gif"></span>
-					<input type="number" name='residual_percentage' id='residual_percentage' class='pvt_dec' min='0' />%
+					<input type="text" name='residual_percentage' id='residual_percentage' class='pvt_dec' />%
 				</td>
 			</tr>
 

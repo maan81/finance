@@ -12,12 +12,13 @@ function validate(loan_amount,residual_amount,rate,term,frequency){
 
 	var err = [];
 
-	console.log(loan_amount)
+	//console.log(loan_amount)
 	if(isNaN(loan_amount) || loan_amount<1 ){
 		err.push('loan_amount');
 	}
 
 
+	//console.log(residual_amount)
 	if(isNaN(residual_amount)){
 		residual_amount = 0;
 		$('#residual_amount').val('0');
@@ -25,7 +26,6 @@ function validate(loan_amount,residual_amount,rate,term,frequency){
 	}else if(residual_amount>loan_amount){
 		err.push('residual_amount');
 	}
-	//console.log(residual_amount)
 
 
 	//console.log(term)
@@ -71,6 +71,7 @@ function validate(loan_amount,residual_amount,rate,term,frequency){
 	}
 }
 
+
 $(function(){
 
 	//enable +ve numbers only
@@ -80,15 +81,32 @@ $(function(){
 
 	//when changing resiual amount ...
 	$('#residual_amount').change(function(){
+console.log('asdf')
+		var residual_amount =  parseFloat($(this)
+												.val()
+												.split(',')
+												.join(''));
+
+		var loan_amount = parseFloat($('#loan_amount')
+									.val()
+									.split(',')
+									.join(''));
+
+console.log(residual_amount)
+console.log(loan_amount)
 
 		//change residual percentage
-		$('#residual_percentage').val(
-										($(this).val() / $('#loan_amount').val() * 100)
-											.toFixed(2)
-									)
+		$('#residual_percentage')
+					.val( residual_amount / loan_amount * 100);
+console.log(Math.round($('#residual_percentage').val()))
+		if(Math.round($('#residual_percentage').val()!=NaN)){
+console.log('asdf')
+			$('#residual_percentage').val(parseFloat($('#residual_percentage').val()).toFixed(2))
+		}
+
 
 		//validate 
-		if($(this).val()<$('#loan_amount')){
+		if(residual_amount>loan_amount){
 			$(this)
 				.css('border-color','red')
 				.prev()
@@ -102,20 +120,51 @@ $(function(){
 	})
 
 
-	// //when changing residual percentage ...
-	// $('#residual_percentage').change(function(){
+	//when changing residual percentage ...
+	$('#residual_percentage').change(function(){
 
-	// 	//change residual amount
-	// 	$('#residual_amount').val(
-	// 								($(this).val() * $('#loan_amount').val() )
+		var residual_percentage =  parseFloat($(this)
+													.val()
+													.split(',')
+													.join(''));
+
+		var loan_amount = parseFloat($('#loan_amount')
+									.val()
+									.split(',')
+									.join(''));
+
+
+		//change residual amount
+		$('#residual_amount')
+						.val(residual_percentage * loan_amount / 100);
+console.log(Math.round($('#residual_amount').val()))
+		if(Math.round($('#residual_amount').val()) != NaN){
+			$('#residual_amount').val(parseFloat($('#residual_amount').val()).toFixed(2))
+		}
+
+		//validate 
+		if(residual_percentage>100){
+			$(this)
+				.css('border-color','red')
+				.prev()
+				.css('visibility','visible');
+
+console.log('bb')
+			$('#residual_amount')
+				.css('border-color','red')
+				.prev()
+				.css('visibility','visible');
+		}
+	})
+
+
+	// //when changing loan amount ...
+	// $('#loan_amount').change(function(){
+	// 	//change residual percentage
+	// 	$('#residual_percentage').val(
+	// 									($(this).val() / $('#loan_amount').val() * 100)
 	// 										.toFixed(2)
 	// 								)
-	// })
-
-
-	// $('#loan_amount').change(function(){
-	// 	$('#residual_amount').trigger('change');
-	// 	//$('#residual_percentage').trigger('change');
 	// })
 
 	$('#calculate').click(function(e){
