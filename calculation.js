@@ -79,9 +79,18 @@ $(function(){
 		.numeric({/*decimal : '.',*/ separator : ',' , negative : false})
 
 
+	//when leaving residual amount to empty, put 0
+	$('#residual_amount').blur(function(){
+		if(!$(this).val() || ($(this).val().length==0)){
+			$(this).val('0');
+			$('#residual_percentage').val('0');
+		}
+	})
+
+
 	//when changing resiual amount ...
 	$('#residual_amount').change(function(){
-console.log('asdf')
+
 		var residual_amount =  parseFloat($(this)
 												.val()
 												.split(',')
@@ -92,15 +101,11 @@ console.log('asdf')
 									.split(',')
 									.join(''));
 
-console.log(residual_amount)
-console.log(loan_amount)
 
 		//change residual percentage
 		$('#residual_percentage')
 					.val( residual_amount / loan_amount * 100);
-console.log(Math.round($('#residual_percentage').val()))
 		if(Math.round($('#residual_percentage').val()!=NaN)){
-console.log('asdf')
 			$('#residual_percentage').val(parseFloat($('#residual_percentage').val()).toFixed(2))
 		}
 
@@ -120,6 +125,15 @@ console.log('asdf')
 	})
 
 
+
+	//when leaving residual amount to empty, put 0
+	$('#residual_percentage').blur(function(){
+		if(!$(this).val() || ($(this).val().length==0)){
+			$(this).val('0');
+			$('#residual_amount').val('0');
+		}
+	})
+
 	//when changing residual percentage ...
 	$('#residual_percentage').change(function(){
 
@@ -137,7 +151,6 @@ console.log('asdf')
 		//change residual amount
 		$('#residual_amount')
 						.val(residual_percentage * loan_amount / 100);
-console.log(Math.round($('#residual_amount').val()))
 		if(Math.round($('#residual_amount').val()) != NaN){
 			$('#residual_amount').val(parseFloat($('#residual_amount').val()).toFixed(2))
 		}
@@ -149,7 +162,6 @@ console.log(Math.round($('#residual_amount').val()))
 				.prev()
 				.css('visibility','visible');
 
-console.log('bb')
 			$('#residual_amount')
 				.css('border-color','red')
 				.prev()
@@ -197,8 +209,8 @@ console.log('bb')
 					continue;
 				}
 
-console.log(res[i])
 				$('#'+res[i])
+
 					.css('border-color','red')
 					.prev()
 					.css('visibility','visible');
@@ -253,7 +265,7 @@ console.log(res[i])
 		var payment = (num/den).toFixed(2);
 
 
-		$('#result').text(payment);
+		$('#result').text('$ '+payment);
 
 	})
 
