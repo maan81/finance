@@ -71,6 +71,16 @@ function validate(loan_amount,residual_amount,rate,term,frequency){
 	}
 }
 
+//fn to add commas.
+//used only at the last result.
+function addCommas(yourNumber) {
+    //Seperates the components of the number
+    var n= yourNumber.toString().split(".");
+    //Comma-fies the first part
+    n[0] = n[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    //Combines the two sections
+    return n.join(".");
+}
 
 $(function(){
 
@@ -84,6 +94,8 @@ $(function(){
 		if(!$(this).val() || ($(this).val().length==0)){
 			$(this).val('0');
 			$('#residual_percentage').val('0');
+		}else{
+			$(this).trigger('change');
 		}
 	})
 
@@ -97,9 +109,9 @@ $(function(){
 												.join(''));
 
 		var loan_amount = parseFloat($('#loan_amount')
-									.val()
-									.split(',')
-									.join(''));
+											.val()
+											.split(',')
+											.join(''));
 
 
 		//change residual percentage
@@ -265,7 +277,7 @@ $(function(){
 		var payment = (num/den).toFixed(2);
 
 
-		$('#result').text('$ '+payment);
+		$('#result').text('$ '+addCommas(payment));
 
 	})
 
